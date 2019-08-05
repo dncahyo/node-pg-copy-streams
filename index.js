@@ -67,8 +67,10 @@ CopyStreamQuery.prototype.handleCommandComplete = function(msg) {
   this.cb_flush()
 
   // unpipe from connection
-  this.unpipe(this.connection.stream)
-  this.connection = null
+  if (this.connection) {
+    this.unpipe(this.connection.stream)
+    this.connection = null
+  }
 }
 
 CopyStreamQuery.prototype.handleReadyForQuery = function() {
