@@ -64,7 +64,9 @@ CopyStreamQuery.prototype.handleCommandComplete = function(msg) {
 
   // we delay the _flush cb so that the 'end' event is
   // triggered after CommandComplete
-  this.cb_flush()
+  if (this.cb_flush) {
+    this.cb_flush()
+  }
 
   // unpipe from connection
   if (this.connection) {
